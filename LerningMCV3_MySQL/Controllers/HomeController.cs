@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace LerningMCV3_MySQL.Controllers
 {
     public class HomeController : Controller

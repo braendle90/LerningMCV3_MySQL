@@ -8,19 +8,50 @@ using System.Threading.Tasks;
 using LerningMCV3_MySQL.ViewModel;
 using LerningMCV3_MySQL.Models;
 using System.Net;
+using LerningMCV3_MySQL.Services;
+using Microsoft.AspNetCore.Authorization;
+using MimeKit;
 
 namespace LerningMCV3_MySQL.Controllers
 {
+    
     public class PersonViewModelController : Controller
     {
         private readonly ApplicationDbContext context;
+        private readonly IMailService _mailService;
 
-        public PersonViewModelController(ApplicationDbContext context)
+        public PersonViewModelController(ApplicationDbContext context, IMailService mailService)
         {
             this.context = context;
+            this._mailService = mailService;
         }
+
+        [Authorize]
         public async Task<IActionResult> Index()
         {
+
+
+            var mailModel = new MailRequest();
+            var message = new MimeMessage();
+     
+
+            var builder = new BodyBuilder();
+
+            mailModel.ToMail = "d.braendle@aub.at";
+            mailModel.Subject = "Test Mail ASP";
+
+           // mailModel.Attachments = 
+
+           // mailModel.Attachments = builder.Attachments.Add(@"C:\Users\DCV\Desktop\CodingCampus\MCV Lerning\LerningMCV3_MySQL\LerningMCV3_MySQL\Controllers\cars.dump.txt");
+
+
+
+
+            // mailModel.Attachments.Add (@"C:\Users\DCV\Desktop\CodingCampus\MCV Lerning\LerningMCV3_MySQL\LerningMCV3_MySQL\Controllers\cars.dump.txt");
+
+            _mailService.SendEmailAsync(mailModel);
+
+
             var pax = await context.Persons
                 .Include(x => x.Adress)
                 .Include(x => x.Pet)
@@ -72,6 +103,8 @@ namespace LerningMCV3_MySQL.Controllers
 
                 context.Add(pax);
                 context.SaveChanges();
+
+              
 
                 return RedirectToAction("Index");
 
@@ -215,6 +248,10 @@ namespace LerningMCV3_MySQL.Controllers
 
         public IActionResult Details(int? id)
         {
+
+
+
+
             if (id == null)
             {
                 return NotFound();
@@ -239,6 +276,7 @@ namespace LerningMCV3_MySQL.Controllers
             }
             return View(personViewModel);
         }
+
 
     }
 }

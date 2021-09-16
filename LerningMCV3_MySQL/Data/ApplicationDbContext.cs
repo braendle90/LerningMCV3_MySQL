@@ -8,7 +8,7 @@ using LerningMCV3_MySQL.ViewModel;
 
 namespace LerningMCV3_MySQL.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -18,6 +18,7 @@ namespace LerningMCV3_MySQL.Data
         public DbSet<Adress> Adresses { get; set; }
         public DbSet<Pet> Pets { get; set; }
         public DbSet<LerningMCV3_MySQL.ViewModel.PersonViewModel> PersonViewModel { get; set; }
+        public DbSet<LerningMCV3_MySQL.ViewModel.CreateRoleViewModel> CreateRoleViewModel { get; set; }
 
     }
 }
