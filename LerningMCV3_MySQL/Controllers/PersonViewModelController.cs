@@ -11,6 +11,7 @@ using System.Net;
 using LerningMCV3_MySQL.Services;
 using Microsoft.AspNetCore.Authorization;
 using MimeKit;
+using System.Diagnostics;
 
 namespace LerningMCV3_MySQL.Controllers
 {
@@ -26,7 +27,8 @@ namespace LerningMCV3_MySQL.Controllers
             this._mailService = mailService;
         }
 
-        [Authorize]
+        [Authorize(Roles = "admin")]
+
         public async Task<IActionResult> Index()
         {
 
@@ -40,16 +42,20 @@ namespace LerningMCV3_MySQL.Controllers
             mailModel.ToMail = "d.braendle@aub.at";
             mailModel.Subject = "Test Mail ASP";
 
-           // mailModel.Attachments = 
 
-           // mailModel.Attachments = builder.Attachments.Add(@"C:\Users\DCV\Desktop\CodingCampus\MCV Lerning\LerningMCV3_MySQL\LerningMCV3_MySQL\Controllers\cars.dump.txt");
+           // var run = new RunProgram(@"C:\Program Files\Adobe\Adobe Photoshop 2021\photoshop.exe");
+
+
+            // mailModel.Attachments = 
+
+            // mailModel.Attachments = builder.Attachments.Add(@"C:\Users\DCV\Desktop\CodingCampus\MCV Lerning\LerningMCV3_MySQL\LerningMCV3_MySQL\Controllers\cars.dump.txt");
 
 
 
 
             // mailModel.Attachments.Add (@"C:\Users\DCV\Desktop\CodingCampus\MCV Lerning\LerningMCV3_MySQL\LerningMCV3_MySQL\Controllers\cars.dump.txt");
 
-            _mailService.SendEmailAsync(mailModel);
+            //_mailService.SendEmailAsync(mailModel);
 
 
             var pax = await context.Persons
