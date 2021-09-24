@@ -36,7 +36,7 @@
                     //<a asp-action="DeleteRole" asp-controller="Administration" asp-route-id="@role.Id" class="btn btn-danger" id="deleteButton">Danger</a>
                     <a name="@role.Id" class="btn btn-danger" onclick="hideButton(this)" id="@role.Id">Danger</a>
                     <a name="@role.Id" asp-action="DeleteRole" asp-controller="Administration" asp-route-id="@role.Id" class="btn btn-danger" style="display: none"  id="{@role.Id}yes" >YES</a>
-                    <a name="@role.Id" onclick="showButton(this)" class="btn btn-danger" id="{@role.Id}no" style="display: none" >NO</a>
+                    <a name="@role.Id" onclick="showButton(this)" class="btn btn-primary" id="{@role.Id}no" style="display: none" >NO</a>
 
                 } 
                 @if (true)
@@ -67,7 +67,7 @@ else
 
 }
 
-@section Scripts
+@*@section Scripts
 {
     <script>
 
@@ -110,4 +110,4 @@ else
 
 
     </script>
-}
+}*@
